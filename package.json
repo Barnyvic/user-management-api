@@ -1,7 +1,6 @@
 {
   "name": "user-management-api",
   "version": "1.0.0",
-  "main": "server.js",
   "author": "Barny victor <victorbarny4@gmail.com>",
   "license": "MIT",
   "scripts": {
