@@ -12,7 +12,7 @@ export interface IUser {
 export interface CustomRequest {
   user: IUser;
   file?: object;
-  params: object;
-  query: object;
-  path: object;
+  params: any;
+  query: any;
+  path: string;
 }
