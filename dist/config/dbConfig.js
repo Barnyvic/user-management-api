@@ -16,7 +16,9 @@ exports.dbConnection = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 mongoose_1.default.set("strictQuery", true);
 const dbConnection = () => __awaiter(void 0, void 0, void 0, function* () {
-    const url = process.env.MONGODB_URL || "mongodb://localhost:27017";
+    const url = process.env.NODE_ENV === "test"
+        ? process.env.TEST_MONGODB_URI
+        : process.env.MONGODB_URL || "mongodb://localhost:27017";
     try {
         yield mongoose_1.default.connect(url);
         console.log("MONGODB CONNECTED SUCCESSFULLY!....");
