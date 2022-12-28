@@ -70,7 +70,7 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 
 ---
 
-https://wild-gray-llama-cape.cyclic.app/
+https://user-management.cyclic.app
 
 ---
 
