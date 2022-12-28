@@ -16,6 +16,6 @@ userRouter.route("/updateprofile/:id").put(authguard, updateProfile);
 userRouter
   .route("/upload")
   .patch(authguard, parser.single("file"), uploadProfilePicture);
-userRouter.route("/delete/:id").put(authguard, deleteAccount);
+userRouter.route("/delete/:id").delete(authguard, deleteAccount);
 
 export default userRouter;
