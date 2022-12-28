@@ -14,6 +14,6 @@ userRouter.route("/updateprofile/:id").put(authMiddleware_1.authguard, userContr
 userRouter
     .route("/upload")
     .patch(authMiddleware_1.authguard, upload_1.default.single("file"), userController_1.uploadProfilePicture);
-userRouter.route("/delete/:id").put(authMiddleware_1.authguard, userController_1.deleteAccount);
+userRouter.route("/delete/:id").delete(authMiddleware_1.authguard, userController_1.deleteAccount);
 exports.default = userRouter;
 //# sourceMappingURL=userRoute.js.map
