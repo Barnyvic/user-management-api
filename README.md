@@ -56,6 +56,8 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 
 <p> <b>User Routes</b></p>
 
+- getAllUser : <b>/api/user/profile</b>
+
 - getSingleUser : <b>/api/user/profile/:id</b>
 
 - updateUser : <b>/api/user/updateprofile/:id </b>
@@ -186,7 +188,7 @@ Success
       "phoneNumber":"0988737645673"
   ```
 
-  ### deleted blogs
+  ### deleted User
 
 - Route: /api/user/delete/:id
 - Method: DELETE
@@ -250,6 +252,38 @@ Success
 ```
 {
    "message": "User Data"
+    user: {
+        id : 6363d816a2ee2e2486defc19
+        "email": "Gift@example.com",
+        "password": "aaaaa",
+        "firstname": "Gift",
+        "lastname": "Barny",
+        "phoneNumber":"0988737645673",
+        "profilePicture": "dowloadimage.png"
+    }
+}
+```
+
+### Get all User
+
+- Route: /api/user/profile
+- Method: GET
+- Authorization
+  - Token
+- Response
+
+```
+{
+   "message": "User Data"
+    user: {
+        id : 6363d816a2ee2e2486defc19
+        "email": "Gift@example.com",
+        "password": "aaaaa",
+        "firstname": "Gift",
+        "lastname": "Barny",
+        "phoneNumber":"0988737645673",
+        "profilePicture": "dowloadimage.png"
+    }
     user: {
         id : 6363d816a2ee2e2486defc19
         "email": "Gift@example.com",

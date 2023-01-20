@@ -3,7 +3,21 @@ import Users from "../model/user";
 
 import { errorResponse, successResponse, handleError } from "../utils/response";
 
-//@desc updateProfile
+//@desc get all  user
+//@route GET /profile
+//@access Private
+
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const user = await Users.find().select("-password").sort({ createdAt: -1 });
+    return successResponse(res, 200, "Users Data", user);
+  } catch (error) {
+    handleError(req, error);
+    return errorResponse(res, 500, "Server error.");
+  }
+};
+
+//@desc get single  user
 //@route GET /profile/:id
 //@access Private
 
@@ -59,6 +73,9 @@ export const updateProfile = async (req: Request, res: Response) => {
 export const uploadProfilePicture = async (req: Request, res: Response) => {
   try {
     const { _id } = req.user;
+
+    console.log(req.file?.path);
+
     const user = await Users.findByIdAndUpdate(
       _id,
       { profilePicture: req.file?.path },

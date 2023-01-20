@@ -3,6 +3,7 @@ import { Router } from "express";
 import { authguard } from "../middleware/authMiddleware";
 import {
   deleteAccount,
+  getAllUsers,
   updateProfile,
   uploadProfilePicture,
 } from "../controller/userController";
@@ -11,6 +12,7 @@ import { getSingleUser } from "../controller/userController";
 
 const userRouter = Router();
 
+userRouter.route("/profile").get(authguard, getAllUsers);
 userRouter.route("/profile/:id").get(authguard, getSingleUser);
 userRouter.route("/updateprofile/:id").put(authguard, updateProfile);
 userRouter
