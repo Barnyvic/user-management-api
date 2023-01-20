@@ -9,6 +9,7 @@ const userController_1 = require("../controller/userController");
 const upload_1 = __importDefault(require("../middleware/upload"));
 const userController_2 = require("../controller/userController");
 const userRouter = (0, express_1.Router)();
+userRouter.route("/profile").get(authMiddleware_1.authguard, userController_1.getAllUsers);
 userRouter.route("/profile/:id").get(authMiddleware_1.authguard, userController_2.getSingleUser);
 userRouter.route("/updateprofile/:id").put(authMiddleware_1.authguard, userController_1.updateProfile);
 userRouter

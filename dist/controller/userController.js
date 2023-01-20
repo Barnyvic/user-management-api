@@ -12,10 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAccount = exports.uploadProfilePicture = exports.updateProfile = exports.getSingleUser = void 0;
+exports.deleteAccount = exports.uploadProfilePicture = exports.updateProfile = exports.getSingleUser = exports.getAllUsers = void 0;
 const user_1 = __importDefault(require("../model/user"));
 const response_1 = require("../utils/response");
-//@desc updateProfile
+//@desc get all  user
+//@route GET /profile
+//@access Private
+const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield user_1.default.find().select("-password").sort({ createdAt: -1 });
+        return (0, response_1.successResponse)(res, 200, "Users Data", user);
+    }
+    catch (error) {
+        (0, response_1.handleError)(req, error);
+        return (0, response_1.errorResponse)(res, 500, "Server error.");
+    }
+});
+exports.getAllUsers = getAllUsers;
+//@desc get single  user
 //@route GET /profile/:id
 //@access Private
 const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -59,10 +73,11 @@ exports.updateProfile = updateProfile;
 //@route PATCH /upload
 //@access Private
 const uploadProfilePicture = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     try {
         const { _id } = req.user;
-        const user = yield user_1.default.findByIdAndUpdate(_id, { profilePicture: (_a = req.file) === null || _a === void 0 ? void 0 : _a.path }, { new: true });
+        console.log((_a = req.file) === null || _a === void 0 ? void 0 : _a.path);
+        const user = yield user_1.default.findByIdAndUpdate(_id, { profilePicture: (_b = req.file) === null || _b === void 0 ? void 0 : _b.path }, { new: true });
         return (0, response_1.successResponse)(res, 200, "picture uploaded successfully", user);
     }
     catch (error) {
