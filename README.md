@@ -84,8 +84,8 @@ https://user-management.cyclic.app
 
 | User-Schema    | Datatypes |
 | -------------- | :-------: |
-| firstname      |  String   |
-| lastname       |  String   |
+| firstName      |  String   |
+| lastName       |  String   |
 | password       |  String   |
 | email          |  String   |
 | phoneNumber    |  String   |
@@ -105,12 +105,12 @@ Signup User
 
 ```
 {
-  "email": "Gift@example.com",
+  "email": "Giftvictor@gmail.com",
   "password": "aaaaa",
-  "firstname": "Gift",
-  "lastname": "Henry",
+  "firstName": "Gift",
+  "lastName": "Henry",
   "confirmPassword":"aaaaa",
-  "phoneNumber":"098873764673",
+  "phoneNumber":"098873764673"
 }
 ```
 
