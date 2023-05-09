@@ -113,6 +113,10 @@ export const deleteAccount = async (req: Request, res: Response) => {
 
 export const updatePassword = async (req: Request, res: Response) => {
   const { oldPassword, newPassword } = req.body;
+
+  if (!oldPassword || !newPassword)
+    return errorResponse(res, 400, "please fill all fields");
+
   const userId = req.user._id;
 
   try {
@@ -137,7 +141,6 @@ export const updatePassword = async (req: Request, res: Response) => {
       "Password updated successfully",
       updatedUser
     );
-
   } catch (error) {
     handleError(req, error);
     return errorResponse(res, 500, "Server error.");
