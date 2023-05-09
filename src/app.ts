@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import logger from "morgan";
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 
 import { CustomRequest } from "./utils/interface";
 import authRouter from "./routes/authroute";
@@ -12,6 +13,7 @@ app.use(logger("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 declare global {
   namespace Express {

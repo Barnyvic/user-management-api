@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Users from "../model/user";
 
 import { errorResponse, successResponse, handleError } from "../utils/response";
+import { comparePassword, hashPassword } from "../utils/hashpassword";
 
 //@desc get all  user
 //@route GET /profile
@@ -100,6 +101,43 @@ export const deleteAccount = async (req: Request, res: Response) => {
       if (!user) return errorResponse(res, 404, "user not found");
       return successResponse(res, 204, "user account deleted successfully");
     }
+  } catch (error) {
+    handleError(req, error);
+    return errorResponse(res, 500, "Server error.");
+  }
+};
+
+//@desc updatePassword
+//@route PATCH /update-password
+//@access Private
+
+export const updatePassword = async (req: Request, res: Response) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user._id;
+
+  try {
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isPasswordValid = await comparePassword(oldPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid old password" });
+    }
+
+    const hashedPassword = await hashPassword(newPassword);
+    user.password = hashedPassword;
+
+    const updatedUser = await user.save();
+
+    return successResponse(
+      res,
+      200,
+      "Password updated successfully",
+      updatedUser
+    );
+
   } catch (error) {
     handleError(req, error);
     return errorResponse(res, 500, "Server error.");

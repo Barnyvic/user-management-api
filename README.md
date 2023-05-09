@@ -54,15 +54,21 @@ All API requests are made by sending a secure HTTPS request using one of the fol
 
 - Login : <b>/api/auth/login</b>,
 
+- Logout : <b>/api/auth/logout</b>,
+  
+
 <p> <b>User Routes</b></p>
 
-- getAllUser : <b>/api/user/profile</b>
+- getAllUser : <b>/api/user/profiles</b>
 
 - getSingleUser : <b>/api/user/profile/:id</b>
 
 - updateUser : <b>/api/user/updateprofile/:id </b>
 
 - deleteUser : <b>/api/user/delete/:id </b>
+
+- changePassword : <b>/api/user/update-password </b>
+
 
 - uploadProfilePicture : <b>/api/user/upload</b>
 
@@ -152,7 +158,6 @@ Success
 
 ```
 {
-    Token: 'hhhdbhdhjdywdkDUWGFYQDVQUJJVHjhsggwtvwbvvvvwahwjkjkagqjwgbqhhwhghahwhahjwh',
     Email: "Gift@example.com",
     Name:  "Gift Henry"
     id : 6363d816a2ee2e2486defc19

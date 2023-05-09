@@ -76,17 +76,36 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!email || !password)
       return errorResponse(res, 400, "please fill all fields");
     const user = await Users.findOne({ email });
+
     if (!user) return errorResponse(res, 404, "user not found");
+
     const isPassword = await comparePassword(password, user.password);
+
     if (!isPassword) return errorResponse(res, 400, "incorrect password");
     const token = await generateToken({
       id: user.id,
       email: user.email,
     });
+
+     res.cookie('accessToken', token, {
+            httpOnly: true,
+        })
+
     return successResponse(res, 200, "user logged in successfully", {
-      user,
-      token,
+     Name: `${user.firstName} ${user.lastName}`
     });
+  } catch (error) {
+    handleError(req, error);
+    return errorResponse(res, 500, "Server error.");
+  }
+};
+
+export const logoutUser = async (req: Request, res: Response) => {
+  try {
+    // Clear the cookie that contains the JWT token
+    res.clearCookie("accessToken");
+
+    return successResponse(res, 200, "User logged out successfully");
   } catch (error) {
     handleError(req, error);
     return errorResponse(res, 500, "Server error.");
